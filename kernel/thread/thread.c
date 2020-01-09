@@ -90,6 +90,16 @@ static const char *thd_state_to_str(kthread_t * thd) {
     }
 }
 
+int thd_foreach(int (*cb)(kthread_t* thd, void* user_data), void* data) {
+    kthread_t *cur;
+
+    LIST_FOREACH(cur, &thd_list, t_list) {
+        cb(cur, data);
+    }
+
+    return 0;
+}
+
 int thd_pslist(int (*pf)(const char *fmt, ...)) {
     kthread_t *cur;
 

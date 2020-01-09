@@ -530,6 +530,15 @@ int thd_join(kthread_t * thd, void **value_ptr);
 */
 int thd_detach(kthread_t *thd);
 
+/** \brief Iterate all threads and call the passed callback for each
+
+    \param cb               The callback to call for each thread
+    \param data             User data to be passed to the callback
+
+    \retval 0               On success.
+*/
+int thd_foreach(int (*cb)(kthread_t* thd, void* user_data), void* data);
+
 /** \brief  Print a list of all threads using the given print function.
 
     \param  pf              The printf-like function to print with.
